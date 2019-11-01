@@ -99,7 +99,7 @@ def commaCheck(lines):
                     if(lines[num_check-1].strip().endswith(',')):
                         count_last = count_last + 1 
                         log.append("Line Number[ERROR]: " +str(num_check) + "  Please remove comma ','for last value")
-                elif(not lines[num_check].strip().endswith(',')) and ("}" != lines[num_check+1].strip(",").strip()) and ("{" not in  lines[num_check].strip()) and  (end_check):
+                elif(not lines[num_check].strip().endswith(',')) and ("}" not in  lines[num_check+1].strip(",").strip()) and ("{" not in  lines[num_check].strip()) and  (end_check):
                     count_last = count_last+1
                     log.append("Line Number[ERROR]: " +str(num_check+1) + "  Please put comma ',' in end of line")
                 num_check = num_check +1
@@ -126,11 +126,9 @@ def  code_repetation(lines):
         if (count_dup>2) and (line.strip() not in avoid_rep):
             avoid_rep.append(line.strip())
             log.append(line.strip())
-            log.append("Line Numner[IMPROVEMENT] " + str(counter) + " Above line Repeted "+str(count_dup)+ " time's please optimize it if possible")
+            log.append("Line Number[IMPROVEMENT] " + str(counter) + " Above line Repeted "+str(count_dup)+ " time's please optimize it if possible")
     log.append("===============================================================================")
     log.append('\n')
-
-
 def check_function_desp(all_line):
     global log
     count_des_check = 0
