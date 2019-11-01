@@ -215,7 +215,7 @@ def internalReview(file):
     commaCheck(lines)
     code_repetation(lines)
     check_function_desp(lines)
-
+#init function
 internalReview(sys.argv[1])
 
 user_input= input("Press 1 for save log in File:" +'\n' +"Press 2 for show log here:"+'\n')
