@@ -117,7 +117,7 @@ def  code_repetation(lines):
     for line in lines:
         counter =  counter + 1
         count_dup = 0
-        if  ('--' not in line.strip()) and  ('ul' not in line.strip()) and ('session' not in line.strip()) and ('==' not in line.strip()) and ('++' not in line.strip()) and ('ngx' not in line.strip()) and ('false' not in line.strip()) and ('table' not in line.strip()) and ('tr>' not in line.strip())  and ('return' not in line.strip()) and ('th>' not in line.strip()) and ('span' not in line.strip()) and ('thead' not in line.strip()) and('type' not in line.strip()) and ("true" not in line.strip()) and ("div" not in line.strip()) and ("<br>" not in line.strip()) and ("{" not in line.strip()) and ("}" not in line.strip()) and ("%>" not in line.strip()) and ("<%" not in line.strip()) and ("if" not in line.strip())and ("else" not in line.strip())and ("return true" not in line.strip()) and ("<div>" not in line.strip()) and (line.strip() != "") and ("<script>" not in line.strip()) and ("</div>" not in line.strip()) and ("<%end%>"  not in line) and ("end" not in line.strip()):
+        if  ('--' not in line.strip()) and  ('ul' not in line.strip()) and ('break' not in line.strip()) and ('td>' not in line.strip()) and ('session' not in line.strip()) and ('==' not in line.strip()) and ('++' not in line.strip()) and ('ngx' not in line.strip()) and ('false' not in line.strip()) and ('table' not in line.strip()) and ('tr>' not in line.strip())  and ('return' not in line.strip()) and ('th>' not in line.strip()) and ('span' not in line.strip()) and ('thead' not in line.strip()) and('type' not in line.strip()) and ("true" not in line.strip()) and ("div" not in line.strip()) and ("<br>" not in line.strip()) and ("{" not in line.strip()) and ("}" not in line.strip()) and ("%>" not in line.strip()) and ("<%" not in line.strip()) and ("if" not in line.strip()) and ("else" not in line.strip())and ("return true" not in line.strip()) and ("<div>" not in line.strip()) and (line.strip() != "") and ("<script>" not in line.strip()) and ("</div>" not in line.strip()) and ("<%end%>"  not in line) and ("end" not in line.strip()):
             for _all in lines:
                 if (line.strip() == _all.strip()):
                     count_dup = count_dup+1
@@ -161,6 +161,7 @@ def divCount(lines):
     log.append('\n')
     
 def create_new_file():
+    line_c = 0
     file_name = "internalReview_comments_"+str(now.day) +":"+str(now.month)+":"+str(now.year)+":"+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+".log"
     file = open(file_name, "w")
     curent_time = str(now.day) +":"+str(now.month)+":"+str(now.year)
@@ -177,7 +178,12 @@ def create_new_file():
     file.write("*********************************************************************")
     file.write('\n')
     for x in log:
-        file.write(x)
+        if x != '\n' and "====" not in x:
+            line_c = line_c + 1
+            num_l = line_c
+        else:
+            num_l = ""
+        file.write(str(num_l)+" "+x)
         file.write('\n')
     file.write("***********************************Thank You*************************************")
     file.close()
@@ -191,7 +197,7 @@ def display_logs():
 def check_for_break(b_lines):
     b_count = 0
     flag = True
-    log.append("================== BREAK CHECK ===================")
+    log.append("================================= BREAK CHECK =================================")
     for b_l in b_lines:
         b_count = b_count + 1
         line_array = re.split(r'\s',b_l)
@@ -200,12 +206,10 @@ def check_for_break(b_lines):
                 if  "if" in b_lines[i]:
                     log.append("Line Number[IMPROVEMENT]:" + str(i+1) +" Check for 'break' or 'return' inside if to increase the productivity")
                     break
-    log.append("========================================================")
+                if "end" in b_lines[i]:
+                    break
+    log.append("===============================================================================")
                        
-            
-        
-    
-     
 def internalReview(file):
     f = open(sys.argv[1], "r")
     lines  =  open(sys.argv[1], "r").readlines()
