@@ -4,9 +4,7 @@ import sys
 log = []
 import datetime
 import os
-
 now = datetime.datetime.now()
-
 def Valid_password_mixed_case(password):
     letters = set(password)
     global log
@@ -189,7 +187,25 @@ def display_logs():
     for x in log:
         print(x)
     print("***********************************Thank You*************************************")
+
+def check_for_break(b_lines):
+    b_count = 0
+    flag = True
+    log.append("================== BREAK CHECK ===================")
+    for b_l in b_lines:
+        b_count = b_count + 1
+        line_array = re.split(r'\s',b_l)
+        if (("for" in b_l) and ("do" in b_l)):
+            for i in range(b_count+1 , len(b_lines)):
+                if  "if" in b_lines[i]:
+                    log.append("Line Number[IMPROVEMENT]:" + str(i+1) +" Check for 'break' or 'return' inside if to increase the productivity")
+                    break
+    log.append("========================================================")
+                       
+            
         
+    
+     
 def internalReview(file):
     f = open(sys.argv[1], "r")
     lines  =  open(sys.argv[1], "r").readlines()
@@ -215,6 +231,7 @@ def internalReview(file):
     commaCheck(lines)
     code_repetation(lines)
     check_function_desp(lines)
+    check_for_break(lines)
 #init function
 internalReview(sys.argv[1])
 
