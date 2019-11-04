@@ -2,11 +2,7 @@
 
 SO FAR DONE:
 
-    code_repetation(lines)
-    check_function_desp(lines)
-    check_for_break(lines)
 #init function
-
 1.Unused variable finder.
 2.Number of character in a line
 3.Boolean not used in string check
