@@ -173,7 +173,7 @@ def create_new_file():
     file.write('\n')
     file.write("* File Name    : "+file_name+"                                    ")
     file.write('\n')
-    file.write("* serial No    : "+str(len(log))+"                                    ")
+    file.write("* serial No    : "+str(bin(len(log)-10).replace("0b",""))+"                                    ")
     file.write('\n')
     file.write("*********************************************************************")
     file.write('\n')
