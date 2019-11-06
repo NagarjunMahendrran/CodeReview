@@ -140,6 +140,22 @@ def check_function_desp(all_line):
     log.append("===============================================================================")
     log.append('\n')
     
+    
+def find_tprint_or_console(print_l):
+    global log
+    count_p = 0
+    log.append("==========================Tprint and Console check =============================")
+    for l in print_l:
+        count_p =  count_p +1
+        if("tprint" in l):
+            log.append("Line Number[ERROR] " +str(count_p) +" Please remove trace tprint")
+        if("console." in  l):
+            log.append("Line Number[ERROR] " +str(count_p) +" Please remove trace Console.log")
+    log.append("===============================================================================")
+    log.append('\n')
+    
+    
+    
 def divCount(lines):
     global log
     log.append('\n')
@@ -173,7 +189,7 @@ def create_new_file():
     file.write('\n')
     file.write("* File Name    : "+file_name+"                                    ")
     file.write('\n')
-    file.write("* serial No    : "+str(bin(len(log)-10).replace("0b",""))+"                                    ")
+    file.write("* serial No    : "+str(len(log))+"                                    ")
     file.write('\n')
     file.write("*********************************************************************")
     file.write('\n')
@@ -204,11 +220,12 @@ def check_for_break(b_lines):
         if (("for" in b_l) and ("do" in b_l)):
             for i in range(b_count+1 , len(b_lines)):
                 if  "if" in b_lines[i]:
-                    log.append("Line Number[IMPROVEMENT]:" + str(i+1) +" Check for 'break' or 'return' inside if to increase the productivity")
+                    log.append("Line Number[IMPROVEMENT]:" + str(i+1) +" Check if 'break' or 'return'  needed inside if to increase the porformance")
                     break
                 if "end" in b_lines[i]:
                     break
     log.append("===============================================================================")
+    log.append('\n')
                        
 def internalReview(file):
     f = open(sys.argv[1], "r")
@@ -236,6 +253,7 @@ def internalReview(file):
     code_repetation(lines)
     check_function_desp(lines)
     check_for_break(lines)
+    find_tprint_or_console(lines)
 #init function
 internalReview(sys.argv[1])
 
