@@ -4,6 +4,7 @@ import sys
 log = []
 import datetime
 import os
+
 now = datetime.datetime.now()
 def Valid_password_mixed_case(password):
     letters = set(password)
@@ -154,7 +155,11 @@ def find_tprint_or_console(print_l):
     log.append("===============================================================================")
     log.append('\n')
     
-    
+def bool_condition(b_line):
+    global err_msg
+    if("== true" in b_line) or ("== false" in b_line):
+        err_msg = "Comparing boolen with an boolen is not good practice"
+        return False
     
 def divCount(lines):
     global log
@@ -189,7 +194,7 @@ def create_new_file():
     file.write('\n')
     file.write("* File Name    : "+file_name+"                                    ")
     file.write('\n')
-    file.write("* serial No    : "+str(len(log))+"                                    ")
+    file.write("* serial No    : "+str(bin(len(log)-10).replace("0b",""))+"                                    ")
     file.write('\n')
     file.write("*********************************************************************")
     file.write('\n')
@@ -246,6 +251,8 @@ def internalReview(file):
         log.append("Line Number[ERROR]: " +str(count+1) + "  "+err_msg)
       if check_nil(x , count) == False:
         log.append("Line Number[WARNING]: " +str(count+1) + "  "+err_msg)
+      if bool_condition(x) == False:
+        log.append("Line Number[ERROR]: " +str(count+1) + "  "+err_msg)
       count = count + 1
     log.append("===============================================================================")  
     divCount(lines)
