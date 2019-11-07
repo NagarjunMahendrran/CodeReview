@@ -148,16 +148,16 @@ def find_tprint_or_console(print_l):
     log.append("==========================Tprint and Console check =============================")
     for l in print_l:
         count_p =  count_p +1
-        if("tprint" in l):
+        if("Console." in l):
             log.append("Line Number[ERROR] " +str(count_p) +" Please remove trace tprint")
-        if("console." in  l):
+        if("tch.tableprint" in  l):
             log.append("Line Number[ERROR] " +str(count_p) +" Please remove trace Console.log")
     log.append("===============================================================================")
     log.append('\n')
     
 def bool_condition(b_line):
     global err_msg
-    if("== true" in b_line) or ("== false" in b_line):
+    if ("== true" in b_line) or ("== false" in b_line):
         err_msg = "Comparing boolen with an boolen is not good practice"
         return False
     
